@@ -16,7 +16,7 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.58;
-    color: #333;
+    color: #011627;
     background-color: #f4f4f4;
     height: 100%;
 }
@@ -27,7 +27,7 @@ body:before {
     position: absolute;
     top: 0;
     left: 0;
-    background: #128ff2;
+    background: #2EC4B6;
     content: "";
     z-index: 0;
 }
@@ -46,7 +46,7 @@ body:before {
     width: 100%;
     min-height: 38px;
     font-size: 15px;
-    border: 1px solid #c8c8c8;
+    border: 1px solid #2EC4B6;
 }
 
 .form-group {
@@ -93,13 +93,13 @@ button.default {
 }
 
 button.primary {
-    background-color: #128ff2;
+    background-color: #7AD9D0;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
 
 button.accent {
-    background-color: #ff4743;
+    background-color: #E71D36;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
@@ -111,7 +111,7 @@ button.accent {
 .username-page-container {
     background: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    border-radius: 2px;
+    border-radius: 15px;
     width: 100%;
     max-width: 500px;
     display: inline-block;
