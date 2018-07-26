@@ -47,6 +47,7 @@ body:before {
     min-height: 38px;
     font-size: 15px;
     border: 1px solid #2EC4B6;
+    border-radius: 15px;
 }
 
 .form-group {
@@ -84,6 +85,7 @@ button {
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     min-height: 38px;
+    border-radius: 15px;
 }
 
 button.default {
@@ -148,6 +150,7 @@ button.accent {
     height: calc(100% - 60px);
     max-height: 600px;
     position: relative;
+    border-radius:15px;
 }
 
 #chat-page ul {
