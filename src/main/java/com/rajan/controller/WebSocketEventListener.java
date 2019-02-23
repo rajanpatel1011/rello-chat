@@ -16,7 +16,7 @@ import com.rajan.model.ChatMessage;
 public class WebSocketEventListener {
 
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
-	
+	private static final String method = "_METHOD_";
 	
 	@Autowired
 	private SimpMessageSendingOperations messagingTemplate;
@@ -31,16 +31,17 @@ public class WebSocketEventListener {
 		
 		String username = (String) headerAccessor.getSessionAttributes().get("username");
 	
-	
-		if(username!=null) {
-			logger.info("User left : "+username);
-			
-			ChatMessage chatMessage = new ChatMessage();
-			chatMessage.setType(ChatMessage.MessageType.LEAVE);
-			chatMessage.setSender(username);
-			
-			messagingTemplate.convertAndSend("/topic/public",chatMessage);
+		try {
+			if (username != null) {
+				logger.info("User left : " + username);
+
+				ChatMessage chatMessage = new ChatMessage();
+				chatMessage.setType(ChatMessage.MessageType.LEAVE);
+				chatMessage.setSender(username);
+				messagingTemplate.convertAndSend("/topic/public", chatMessage);
+			}
+		}catch (Exception e){
+			logger.error(method +" Expetion"+e);
 		}
-	
 	}
 }
