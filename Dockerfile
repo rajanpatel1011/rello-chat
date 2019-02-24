@@ -1,4 +1,4 @@
-FROM JAVA:8
+FROM openjdk:8-jdk-alpine
 EXPOSE 8080
-ADD target/Rello.jar Rello.jar
-ENTRYPOINT ["java","-jar","Rello.jar"]
+ADD target/rello.jar rello.jar
+ENTRYPOINT ["java","-jar","rello.jar"]
