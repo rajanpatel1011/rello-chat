@@ -17,5 +17,5 @@
   "name": "rello-chat",
   "scripts": {
   },
-  "stack": "heroku-16"
+  "stack": "heroku-18"
 }
