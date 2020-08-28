@@ -23,14 +23,14 @@ public class WebSocketEventListener {
 	
 	@EventListener
 	public void handleWebSocketConnectListener(SessionConnectEvent event) {
-		logger.info("Received a new Connection"+event.getSource());
+		logger.info("Received a new Connection"+event.getUser().toString());
 	}
 	@EventListener
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
 		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 		
 		String username = (String) headerAccessor.getSessionAttributes().get("username");
-	
+	  logger.info("webSocketEvent Message:"+(String)headerAccessor.getSessionAttributes().get("message"));
 		try {
 			if (username != null) {
 				logger.info("User left : " + username.toString());
