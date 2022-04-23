@@ -9,6 +9,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import com.rajan.model.ChatMessage;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ChatController {
@@ -31,4 +32,6 @@ public class ChatController {
 
 		return chatMessage;
 		}
+
+
 }
