@@ -12,6 +12,8 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import com.rajan.model.ChatMessage;
 
+import java.util.Objects;
+
 @Component
 public class WebSocketEventListener {
 
@@ -23,25 +25,23 @@ public class WebSocketEventListener {
 	
 	@EventListener
 	public void handleWebSocketConnectListener(SessionConnectEvent event) {
-		logger.info("Received a new Connection"+event.getUser().toString());
+//		logger.info("Received a new Connection"+event.getUser().toString());
 	}
 	@EventListener
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
 		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-		
-		String username = (String) headerAccessor.getSessionAttributes().get("username");
-	  logger.info("webSocketEvent Message:"+(String)headerAccessor.getSessionAttributes().get("message"));
+		String username = (String) Objects.requireNonNull(headerAccessor.getSessionAttributes()).get("username");
+	  logger.info("webSocketEvent Message:"+ headerAccessor.getSessionAttributes().get("message"));
 		try {
 			if (username != null) {
-				logger.info("User left : " + username.toString());
-
+				logger.info("User left : " + username);
 				ChatMessage chatMessage = new ChatMessage();
 				chatMessage.setType(ChatMessage.MessageType.LEAVE);
 				chatMessage.setSender(username);
 				messagingTemplate.convertAndSend("/topic/public", chatMessage);
 			}
 		}catch (Exception e){
-			logger.error(method +" Expetion"+e);
+			logger.error(method +" Exception "+e);
 		}
 	}
 }
