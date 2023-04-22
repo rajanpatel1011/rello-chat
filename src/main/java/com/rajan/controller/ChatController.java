@@ -28,7 +28,7 @@ public class ChatController {
 	@SendTo("/topic/public")
 	public ChatMessage addUser(@Payload ChatMessage chatMessage,SimpMessageHeaderAccessor headerAccessor) {
 		headerAccessor.getSessionAttributes().put("username",chatMessage.getSender());	
-		logger.info(" addUser Method > Contenct: "+chatMessage.getContent()+" Sender :"+chatMessage.getSender());
+		logger.info(" addUser Method > Sender : "+chatMessage.getSender());
 
 		return chatMessage;
 		}

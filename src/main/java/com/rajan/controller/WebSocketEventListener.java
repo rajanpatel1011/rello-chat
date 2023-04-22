@@ -22,10 +22,10 @@ public class WebSocketEventListener {
 	
 	@Autowired
 	private SimpMessageSendingOperations messagingTemplate;
-	
+
 	@EventListener
 	public void handleWebSocketConnectListener(SessionConnectEvent event) {
-//		logger.info("Received a new Connection"+event.getUser().toString());
+		logger.info("Received a new Connection"+ Objects.requireNonNull(event.getUser()));
 	}
 	@EventListener
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
