@@ -25,7 +25,7 @@ public class WebSocketEventListener {
 
 	@EventListener
 	public void handleWebSocketConnectListener(SessionConnectEvent event) {
-		logger.info("Received a new Connection"+ Objects.requireNonNull(event.getUser()));
+		logger.info("Received a new Connection");
 	}
 	@EventListener
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
