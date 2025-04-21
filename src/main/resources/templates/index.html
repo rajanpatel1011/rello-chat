@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:xmls="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmls:th="http://www.thymeleaf.org">
   <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
       <title>Rello Chat-live</title>
       <link rel="stylesheet" href="/css/main.css" />
-      <link rel="icon" href="rello.png">
+      <link rel="icon" href="../static/rello.png">
       
   </head>
   <body>
@@ -26,10 +27,19 @@
         </div>
     </div>
 
+
+    <!-- Chat Section -->
     <div id="chat-page" class="hidden">
         <div class="chat-container">
             <div class="chat-header">
                 <h2>Rello Chat</h2>
+                <div>
+                    <div class="user">
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Sign Out"/>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="connecting">
                 Connecting...
