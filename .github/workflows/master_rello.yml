@@ -47,7 +47,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v3
       with:
-        app-name: 'rello'
+        app-name: 'rellochat'
         slot-name: 'Production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4cae07330b8943a99c0003138162b3bf }}
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B03D5BA8675B4CAAAB2C4B14FDF67DDB }}
         package: '*.jar'
