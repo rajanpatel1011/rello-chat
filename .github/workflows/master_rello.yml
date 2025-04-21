@@ -19,13 +19,13 @@ jobs:
     - name: Set up Java version
       uses: actions/setup-java@v1
       with:
-        java-version: '11'
+        java-version: '17'
 
     - name: Build with Maven
       run: mvn clean install
 
     - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: java-app
         path: '${{ github.workspace }}/target/*.jar'
@@ -34,12 +34,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'production'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
     - name: Download artifact from build job
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: java-app
 
@@ -48,6 +48,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'rello'
-        slot-name: 'production'
+        slot-name: 'Production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_4cae07330b8943a99c0003138162b3bf }}
         package: '*.jar'
