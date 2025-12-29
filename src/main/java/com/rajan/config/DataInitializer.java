@@ -2,6 +2,8 @@ package com.rajan.config;
 
 import com.rajan.model.User;
 import com.rajan.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +13,7 @@ import java.util.Set;
 
 @Configuration
 public class DataInitializer {
+    private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class);
 
     @Bean
     public CommandLineRunner initData(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -23,7 +26,7 @@ public class DataInitializer {
                         Set.of("ADMIN", "USER")
                 );
                 userRepository.save(admin);
-                System.out.println("Admin user created");
+                logger.info("Admin user created");
             }
 
             // Create regular users if they don't exist
@@ -34,7 +37,7 @@ public class DataInitializer {
                         Set.of("USER")
                 );
                 userRepository.save(user1);
-                System.out.println("User1 created");
+                logger.info("User1 created");
             }
 
             if (userRepository.findByUsername("user2").isEmpty()) {
@@ -44,10 +47,10 @@ public class DataInitializer {
                         Set.of("USER")
                 );
                 userRepository.save(user2);
-                System.out.println("User2 created");
+                logger.info("User2 created");
             }
 
-            System.out.println("Data initialization complete!");
+            logger.info("Data initialization complete!");
         };
     }
 }
