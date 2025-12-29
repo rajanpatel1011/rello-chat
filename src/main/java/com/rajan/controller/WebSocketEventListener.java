@@ -12,13 +12,13 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import com.rajan.model.ChatMessage;
 
-import java.util.Objects;
+import java.util.Map;
 
 @Component
 public class WebSocketEventListener {
 
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
-	private static final String method = "_METHOD_";
+	private static final String METHOD = "_METHOD_";
 	
 	@Autowired
 	private SimpMessageSendingOperations messagingTemplate;
