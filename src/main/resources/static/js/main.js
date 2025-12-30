@@ -28,7 +28,9 @@ function connect(event) {
 
         stompClient.connect({}, onConnected, onError);
     }
-    event.preventDefault();
+    if (event && typeof event.preventDefault === 'function') {
+        event.preventDefault();
+    }
 }
 
 
@@ -114,5 +116,23 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
+// If the server rendered an authenticated username into the page (via data-login-username on <body>),
+// auto-fill and skip the username page.
+function tryAutoLogin() {
+    const body = document.body;
+    const loginUsername = body ? body.getAttribute('data-login-username') : null;
+    if (loginUsername && loginUsername !== 'null') {
+        const nameInput = document.querySelector('#name');
+        if (nameInput) {
+            nameInput.value = loginUsername;
+            // call connect with a fake event that has preventDefault
+            connect({ preventDefault: () => {} });
+        }
+    }
+}
+
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
+
+// Try auto login on initial load
+tryAutoLogin();
