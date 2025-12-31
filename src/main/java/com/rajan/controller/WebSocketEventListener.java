@@ -34,7 +34,7 @@ public class WebSocketEventListener {
 
 		if (sessionAttributes != null) {
 			String username = (String) sessionAttributes.get("username");
-			logger.info("webSocketEvent Message:" + sessionAttributes.get("message"));
+            logger.info("webSocketEvent Message:{}", sessionAttributes.get("message"));
 
 			try {
 				if (username != null) {
@@ -45,7 +45,7 @@ public class WebSocketEventListener {
 					messagingTemplate.convertAndSend("/topic/public", chatMessage);
 				}
 			} catch (Exception e) {
-				logger.error(METHOD + " Exception " + e);
+                logger.error(METHOD + " Exception {}", String.valueOf(e));
 			}
 		}
 	}

@@ -19,7 +19,7 @@ public class ChatController {
 	@MessageMapping("/chat.sendMessage")
 	@SendTo("/topic/public")
 	public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-		logger.info("Content: "+chatMessage.getContent()+" Sender :"+chatMessage.getSender());
+        logger.info("Content: {} Sender :{}", chatMessage.getContent(), chatMessage.getSender());
 		return chatMessage;
 	}
 	
@@ -28,7 +28,7 @@ public class ChatController {
 	@SendTo("/topic/public")
 	public ChatMessage addUser(@Payload ChatMessage chatMessage,SimpMessageHeaderAccessor headerAccessor) {
 		Objects.requireNonNull(headerAccessor.getSessionAttributes()).put("username",chatMessage.getSender());
-		logger.info(" addUser Method > Sender : "+chatMessage.getSender());
+        logger.info(" addUser Method > Sender : {}", chatMessage.getSender());
 		return chatMessage;
 		}
 
