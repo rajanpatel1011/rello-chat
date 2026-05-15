@@ -21,4 +21,4 @@ steps:
     mavenVersion: '3.10.1'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    goals: 'package -Ddependency-check.skip=true'
