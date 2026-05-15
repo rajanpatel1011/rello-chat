@@ -1,6 +1,7 @@
 package com.rajan.model;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,7 +29,7 @@ public class User {
     public User(String username, String password, Set<String> roles) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.roles = roles == null ? new HashSet<>() : new HashSet<>(roles);
     }
 
     // Getters and Setters
@@ -61,6 +62,6 @@ public class User {
     }
 
     public void setRoles(Set<String> roles) {
-        this.roles = roles;
+        this.roles = roles == null ? new HashSet<>() : new HashSet<>(roles);
     }
 }

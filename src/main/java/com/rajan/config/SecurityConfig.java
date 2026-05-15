@@ -4,6 +4,7 @@ import com.rajan.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
 
@@ -26,7 +28,7 @@ public class SecurityConfig {
         http
                 .csrf(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/css/**", "/js/**", "/ws/**", "/.well-known/**", "/favicon.ico")
+                        .requestMatchers("/css/**", "/js/**", "/ws", "/ws/**", "/health", "/.well-known/**", "/favicon.ico")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
