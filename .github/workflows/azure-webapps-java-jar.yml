@@ -26,7 +26,7 @@ env:
 
 on:
   push:
-    branches: [ "Dev" ]
+    branches: [ "Dev", "feature/docker-compose-local" ]
   workflow_dispatch:
 
 permissions:
