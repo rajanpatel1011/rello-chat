@@ -10,10 +10,16 @@ import org.springframework.web.socket.config.annotation.*;
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
+    private final ErrorHandler errorHandler;
+
+    public WebSocketConfig(ErrorHandler errorHandler) {
+        this.errorHandler = errorHandler;
+    }
+
     @Override
     public void registerStompEndpoints(@NonNull StompEndpointRegistry registry) {
         registry.addEndpoint("/ws").withSockJS();
-        registry.setErrorHandler(new ErrorHandler());
+        registry.setErrorHandler(errorHandler);
     }
 
     @Override

@@ -1,13 +1,9 @@
 #
 # Build stage
 #
-FROM maven:3.6.0-jdk-11-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
-
-
-FROM openjdk:11-jre-slim
-COPY --from=build /home/app/target/rello.jar /usr/local/lib/rello.jar
+FROM eclipse-temurin:21-jre-jammy
+WORKDIR /app
+# Assumes `mvn package` has been run locally and `target/rello.jar` exists
+COPY target/rello.jar /app/rello.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/rello.jar"]
+ENTRYPOINT ["java","-jar","/app/rello.jar"]

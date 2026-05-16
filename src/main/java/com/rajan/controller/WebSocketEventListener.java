@@ -17,36 +17,34 @@ import java.util.Map;
 @Component
 public class WebSocketEventListener {
 
-	private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
-	private static final String METHOD = "_METHOD_";
-	
-	@Autowired
-	private SimpMessageSendingOperations messagingTemplate;
+    private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
 
-	@EventListener
-	public void handleWebSocketConnectListener(SessionConnectEvent event) {
-		logger.info("Received a new Connection");
-	}
-	@EventListener
-	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-		Map<String, Object> sessionAttributes = headerAccessor.getSessionAttributes();
+    @Autowired
+    private SimpMessageSendingOperations messagingTemplate;
 
-		if (sessionAttributes != null) {
-			String username = (String) sessionAttributes.get("username");
-            logger.info("webSocketEvent Message:{}", sessionAttributes.get("message"));
+    @EventListener
+    public void handleWebSocketConnectListener(SessionConnectEvent event) {
+        logger.info("Received a new Connection");
+    }
 
-			try {
-				if (username != null) {
-					logger.info("User left : " + username);
-					ChatMessage chatMessage = new ChatMessage();
-					chatMessage.setType(ChatMessage.MessageType.LEAVE);
-					chatMessage.setSender(username);
-					messagingTemplate.convertAndSend("/topic/public", chatMessage);
-				}
-			} catch (Exception e) {
-                logger.error(METHOD + " Exception {}", String.valueOf(e));
-			}
-		}
-	}
+    @EventListener
+    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
+        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+        Map<String, Object> sessionAttributes = headerAccessor.getSessionAttributes();
+
+        if (sessionAttributes != null) {
+            String username = (String) sessionAttributes.get("username");
+            logger.info("webSocketEvent Message: {}", sessionAttributes.get("message"));
+
+            try {
+                if (username != null && !username.isBlank()) {
+                    logger.info("User left: {}", username);
+                    ChatMessage chatMessage = new ChatMessage(ChatMessage.MessageType.LEAVE, null, username);
+                    messagingTemplate.convertAndSend("/topic/public", chatMessage);
+                }
+            } catch (RuntimeException e) {
+                logger.error("Error sending disconnect notification for user {}", username, e);
+            }
+        }
+    }
 }
