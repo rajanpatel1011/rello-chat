@@ -10,9 +10,10 @@ import org.springframework.web.socket.config.annotation.*;
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
+    @NonNull
     private final ErrorHandler errorHandler;
 
-    public WebSocketConfig(ErrorHandler errorHandler) {
+    public WebSocketConfig(@NonNull ErrorHandler errorHandler) {
         this.errorHandler = errorHandler;
     }
 

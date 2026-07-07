@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -110,7 +111,7 @@ class ControllerIntegrationTest {
                 .param("username", "newuser")
                 .param("password", "password")
                 .param("roles", "USER")
-                .with(csrf()))
+                .with((RequestPostProcessor) csrf()))
                 .andExpect(status().is3xxRedirection());
     }
 }

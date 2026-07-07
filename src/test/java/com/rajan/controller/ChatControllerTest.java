@@ -84,7 +84,7 @@ class ChatControllerTest {
         assertNotNull(result);
         assertEquals("newuser", result.getSender());
         assertEquals(ChatMessage.MessageType.JOIN, result.getType());
-        assertEquals("newuser", headerAccessor.getSessionAttributes().get("username"));
+        assertEquals("newuser", java.util.Objects.requireNonNull(headerAccessor.getSessionAttributes()).get("username"));
     }
 
     @Test

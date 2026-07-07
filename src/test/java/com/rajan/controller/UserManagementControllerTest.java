@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,6 +16,7 @@ import java.util.Set;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,8 +29,6 @@ class UserManagementControllerTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     void setUp() {
@@ -71,7 +69,7 @@ class UserManagementControllerTest {
                 .param("username", "newuser")
                 .param("password", "password123")
                 .param("roles", "USER")
-                .with(csrf()))
+                .with((RequestPostProcessor) csrf()))
                 .andExpect(status().is3xxRedirection());
 
         var savedUser = userRepository.findByUsername("newuser");
@@ -85,7 +83,7 @@ class UserManagementControllerTest {
                 .param("username", "newuser")
                 .param("password", "password123")
                 .param("roles", "USER")
-                .with(csrf()))
+                .with((RequestPostProcessor) csrf()))
                 .andExpect(status().isForbidden());
     }
 

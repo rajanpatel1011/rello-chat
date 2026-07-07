@@ -3,10 +3,9 @@
       xmls:th="http://www.thymeleaf.org">
   <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-      <title>Rello Chat-live</title>
+      <title>Rello Chat - Live</title>
       <link rel="stylesheet" href="/css/main.css" />
       <link rel="icon" href="../static/rello.png">
-      
   </head>
   <!-- Add a data attribute `data-login-username` containing the authenticated username (if any) -->
   <body th:attr="data-login-username=${loginUsername}">
@@ -15,14 +14,14 @@
     </noscript>
 
     <div id="username-page">
-        <div class="username-page-container">
-            <h1 class="title">Enter Your Name</h1>
+        <div class="username-page-container glass-panel">
+            <h1 class="title">CHATHAVEN</h1>
             <form id="usernameForm" name="usernameForm">
                 <div class="form-group">
                     <input type="text" id="name" placeholder="Name" autocomplete="off" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="accent username-submit">Chat</button>
+                    <button type="submit" class="primary username-submit">Join Chat</button>
                 </div>
             </form>
         </div>
@@ -31,9 +30,9 @@
 
     <!-- Chat Section -->
     <div id="chat-page" class="hidden">
-        <div class="chat-container">
+        <div class="chat-container glass-panel">
             <div class="chat-header">
-                <h2>Rello Chat</h2>
+                <h2>CHATHAVEN</h2>
                 <div>
                     <div class="user">
                         <form th:action="@{/logout}" method="post">

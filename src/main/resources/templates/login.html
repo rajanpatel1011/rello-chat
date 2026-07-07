@@ -2,30 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Rello Chat-live</title>
+    <title>Rello Chat - Sign In</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="icon" href="../static/rello.png">
-    
 </head>
 <body>
 <div id="username-page">
-    <div class="username-page-container">
-        <h1 class="title">Rello Chat</h1>
-        <div th:if="${param.error}">
+    <div class="username-page-container glass-panel">
+        <h1 class="title">CHATHAVEN</h1>
+        <div th:if="${param.error}" style="color: var(--error-color); margin-bottom: 1rem;">
             Invalid username and password.
         </div>
-        <div th:if="${param.logout}">
+        <div th:if="${param.logout}" style="color: var(--accent-color); margin-bottom: 1rem;">
             You have been logged out.
         </div>
         <form th:action="@{/login}" method="post" id="usernameForm" name="usernameForm">
             <div class="form-group">
-                <label>Username: <input type="text" name="username"/></label>
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter your username" required />
             </div>
             <div class="form-group">
-                <label>Password: <input type="password" name="password"/></label>
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required />
             </div>
             <div class="form-group">
-                <input type="submit" value="Sign In" />
+                <input type="submit" class="primary" value="Sign In" />
             </div>
         </form>
     </div>

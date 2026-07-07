@@ -1,18 +1,15 @@
 package com.rajan.integration;
 
-import com.rajan.model.User;
 import com.rajan.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Set;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -29,9 +26,6 @@ class SecurityIntegrationTest {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     void setUp() {
@@ -67,7 +61,7 @@ class SecurityIntegrationTest {
 
     @Test
     void testWebSocketEndpointIsAllowedWithoutAuth() throws Exception {
-        mockMvc.perform(get("/ws").with(csrf()))
+        mockMvc.perform(get("/ws").with((RequestPostProcessor) csrf()))
                 .andExpect(result -> {
                     int status = result.getResponse().getStatus();
                     assertFalse(status == 401 || status == 403);
