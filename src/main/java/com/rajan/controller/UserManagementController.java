@@ -44,5 +44,10 @@ public class UserManagementController {
         return "redirect:/admin/users";
     }
 
-    // Add edit and delete methods as needed
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userRepository.deleteById(id);
+        return "redirect:/admin/users";
+    }
+
 }

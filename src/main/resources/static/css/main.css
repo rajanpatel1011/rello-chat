@@ -285,8 +285,17 @@ button.accent:hover {
     background: var(--chat-other);
     border: 1px solid rgba(255,255,255,0.05);
     position: relative;
-    align-self: flex-start;
     animation: slideIn 0.3s ease;
+}
+
+#chat-page .chat-message.other-message {
+    align-self: flex-start;
+}
+
+#chat-page .chat-message.my-message {
+    align-self: flex-end;
+    background: var(--chat-me);
+    border: 1px solid var(--chat-me-border);
 }
 
 /* Avatar styling */
@@ -311,8 +320,17 @@ button.accent:hover {
 /* Adjust message layout to account for absolute avatar if needed, but flex is better */
 /* We will rely on JS to set a class if it's 'my' message, but currently the JS just outputs HTML */
 /* For now, we adjust padding if the avatar is there */
-#chat-page li.chat-message {
+#chat-page li.chat-message.other-message {
     margin-left: 42px; /* space for avatar */
+}
+
+#chat-page li.chat-message.my-message {
+    margin-right: 42px; /* space for avatar on right */
+}
+
+#chat-page .chat-message.my-message i {
+    left: auto;
+    right: -42px;
 }
 
 #chat-page .chat-message span {

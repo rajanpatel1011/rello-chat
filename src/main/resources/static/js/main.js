@@ -82,6 +82,11 @@ function onMessageReceived(payload) {
         message.content = message.sender + ' left!';
     } else {
         messageElement.classList.add('chat-message');
+        if (message.sender === username) {
+            messageElement.classList.add('my-message');
+        } else {
+            messageElement.classList.add('other-message');
+        }
 
         const avatarElement = document.createElement('i');
         const avatarText = document.createTextNode(message.sender[0]);

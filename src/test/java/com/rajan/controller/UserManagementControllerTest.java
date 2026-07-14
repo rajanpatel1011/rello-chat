@@ -92,4 +92,17 @@ class UserManagementControllerTest {
         mockMvc.perform(get("/admin/users"))
                 .andExpect(status().is3xxRedirection());
     }
+
+    @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
+    void testDeleteUserWithAdminRole() throws Exception {
+        User user = new User("testdeleteuser", "password", Set.of("USER"));
+        user = userRepository.save(user);
+
+        mockMvc.perform(post("/admin/users/delete/" + user.getId())
+                .with((RequestPostProcessor) csrf()))
+                .andExpect(status().is3xxRedirection());
+
+        assert userRepository.findById(user.getId()).isEmpty();
+    }
 }
