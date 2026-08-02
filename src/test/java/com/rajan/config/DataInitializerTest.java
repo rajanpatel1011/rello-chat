@@ -9,8 +9,11 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.springframework.test.annotation.DirtiesContext;
+
 @SpringBootTest
 @ActiveProfiles("test")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class DataInitializerTest {
 
     @Autowired
