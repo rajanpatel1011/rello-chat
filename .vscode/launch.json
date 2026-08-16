@@ -3,6 +3,16 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Spring Boot-WebsocketDemoApplication<Rello> (Prod)",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.rajan.WebsocketDemoApplication",
+            "projectName": "Rello",
+            "vmArgs": "-Dspring.profiles.active=prod",
+            "args": "--spring.profiles.active=prod",
+            "envFile": "${workspaceFolder}/.env"
+        },{
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
