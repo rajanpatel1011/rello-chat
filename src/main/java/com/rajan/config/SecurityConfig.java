@@ -20,7 +20,7 @@ public class SecurityConfig {
         http
                 .csrf(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/css/**", "/js/**", "/ws", "/ws/**", "/health", "/.well-known/**", "/favicon.ico")
+                        .requestMatchers("/css/**", "/js/**", "/ws", "/ws/**", "/health", "/actuator/**", "/.well-known/**", "/favicon.ico")
                         .permitAll()
                         .anyRequest().authenticated()
                 )

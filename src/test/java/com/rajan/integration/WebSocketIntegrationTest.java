@@ -6,11 +6,8 @@ import com.rajan.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,15 +16,13 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 class WebSocketIntegrationTest {
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Autowired
     private MockMvc mockMvc;
@@ -41,10 +36,10 @@ class WebSocketIntegrationTest {
     }
 
     @Test
-    void testHealthEndpointIsAccessible() {
-        ResponseEntity<String> response = restTemplate.getForEntity("/health", String.class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("OK", response.getBody());
+    void testHealthEndpointIsAccessible() throws Exception {
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("OK"));
     }
 
     @Test

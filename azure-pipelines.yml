@@ -18,7 +18,7 @@ steps:
     jdkVersionOption: '21'
     jdkArchitectureOption: 'x64'
     mavenVersionOption: 'SpecificVersion'
-    mavenVersion: '3.10.1'
+    mavenVersion: '3.9.9'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package -Ddependency-check.skip=true'
