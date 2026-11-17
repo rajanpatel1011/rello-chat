@@ -7,14 +7,17 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "${LOCAL_PORT:-8080}:8080"
+      - "${LOCAL_PORT:-8080}:8082"
     environment:
-      - SPRING_PROFILES_ACTIVE=local
+      SPRING_PROFILES_ACTIVE: local
+      SSL_KEYSTORE_PATH: file:/run/secrets/localhost.p12
+      SSL_KEYSTORE_PASSWORD: ${SSL_KEYSTORE_PASSWORD:?Set SSL_KEYSTORE_PASSWORD in .env}
     volumes:
       - ./logs:/app/logs
       - ./target:/app/target:ro
+      - ./certs/localhost.p12:/run/secrets/localhost.p12:ro
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "curl", "-fk", "https://localhost:8082/actuator/health"]
       interval: 30s
       timeout: 5s
       retries: 3
