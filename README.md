@@ -26,16 +26,17 @@ keytool -genkeypair -alias localhost -keyalg RSA -keysize 2048 \
   -dname "CN=localhost" -ext "SAN=DNS:localhost,IP:127.0.0.1"
 ```
 
-Start the app with the local profile and the same password in the environment:
+Start the app with the local profile and optional local HTTPS:
 
 ```bash
-SSL_KEYSTORE_PASSWORD="$SSL_KEYSTORE_PASSWORD" \
+SERVER_SSL_ENABLED=true SSL_KEYSTORE_PASSWORD="$SSL_KEYSTORE_PASSWORD" \
   mvn -Dspring-boot.run.profiles=local spring-boot:run
 ```
 
-Then open `https://localhost:8082`. The browser will warn that the local certificate is self-signed.
+Without `SERVER_SSL_ENABLED=true`, the app starts over HTTP on `http://localhost:8082`.
+With HTTPS enabled, open `https://localhost:8082`; the browser will warn that the local certificate is self-signed.
 
-The H2 console is at `https://localhost:8082/h2-console`.
+The H2 console is at `http://localhost:8082/h2-console` by default, or `https://localhost:8082/h2-console` with local HTTPS enabled.
 
 ## Running tests
 
@@ -110,4 +111,3 @@ The initial schema migration is defined in `V1__create_user_tables.sql`.
 - SQL Server settings are isolated to `application-prod.properties`.
 - Local and test environments do not run Flyway by default.
 - Production TLS is expected to terminate at the deployment's reverse proxy by default. To enable direct Spring Boot TLS, provide `SERVER_SSL_ENABLED=true`, `SERVER_SSL_KEY_STORE`, `SERVER_SSL_KEY_STORE_PASSWORD`, and `SERVER_SSL_KEY_STORE_TYPE=PKCS12` through deployment secrets; never package a keystore in the application.
-
