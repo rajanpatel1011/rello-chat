@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-gradient-1: #1a0b2e;
-    --bg-gradient-2: #28104e;
-    --bg-gradient-3: #1c3666;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --bg-gradient-1: #100d0b;
+    --bg-gradient-2: #291116;
+    --bg-gradient-3: #46171c;
+    --glass-bg: rgba(25, 16, 14, 0.72);
+    --glass-border: rgba(231, 189, 89, 0.2);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
-    --accent-color: #00f0ff;
-    --accent-hover: #00c3d0;
-    --error-color: #ff3366;
-    --chat-me: rgba(0, 240, 255, 0.15);
-    --chat-me-border: rgba(0, 240, 255, 0.3);
-    --chat-other: rgba(255, 255, 255, 0.08);
+    --accent-color: #e7bd59;
+    --accent-hover: #f2d27b;
+    --error-color: #ff6470;
+    --chat-me: rgba(141, 35, 40, 0.3);
+    --chat-me-border: rgba(231, 189, 89, 0.38);
+    --chat-other: rgba(255, 255, 255, 0.06);
 }
 
 * {
@@ -69,13 +69,14 @@ body {
 /* Typography */
 h1, h2, h3 {
     font-weight: 600;
-    letter-spacing: -0.02em;
+    font-family: Georgia, 'Times New Roman', serif;
+    letter-spacing: 0.01em;
 }
 
 h1 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    background: linear-gradient(90deg, #fff, var(--accent-color));
+    background: linear-gradient(90deg, #fff1c2, var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -118,7 +119,7 @@ a:hover {
 .form-control:focus, input[type="text"]:focus, input[type="password"]:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(231, 189, 89, 0.2);
     background: rgba(0, 0, 0, 0.4);
 }
 
@@ -140,13 +141,13 @@ button, input[type="submit"] {
 
 button.primary, input[type="submit"] {
     background: var(--accent-color);
-    color: #000;
+    color: #24170a;
 }
 
 button.primary:hover, input[type="submit"]:hover {
     background: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 240, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(231, 189, 89, 0.3);
 }
 
 button.accent {
@@ -154,9 +155,9 @@ button.accent {
     color: #fff;
 }
 button.accent:hover {
-    background: #ff4d79;
+    background: #ff7b83;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 51, 102, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 100, 112, 0.3);
 }
 
 /* Page Containers */
@@ -207,6 +208,27 @@ button.accent:hover {
 .chat-header h2 {
     font-size: 1.25rem;
     margin: 0;
+}
+
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+.brand-logo-large {
+    display: block;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 16px;
+}
+
+.brand-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .chat-header .user form {
@@ -302,7 +324,7 @@ button.accent:hover {
 #chat-page .chat-message i {
     width: 32px;
     height: 32px;
-    background: linear-gradient(135deg, var(--accent-color), #8a2be2);
+    background: linear-gradient(135deg, #8d2328, var(--accent-color));
     border-radius: 50%;
     display: flex;
     justify-content: center;

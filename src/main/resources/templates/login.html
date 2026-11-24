@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Rello Chat - Sign In</title>
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="icon" href="../static/rello.png">
+    <link rel="icon" href="/rello.png">
 </head>
 
 <body>
     <div id="username-page">
         <div class="username-page-container glass-panel">
+            <img class="brand-logo brand-logo-large" src="/rello.png" alt="Rello logo">
             <h1 class="title">Rello</h1>
             <div th:if="${param.error}" style="color: var(--error-color); margin-bottom: 1rem;">
                 Invalid username and password.

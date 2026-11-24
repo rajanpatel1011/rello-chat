@@ -24,6 +24,9 @@ class SecurityConfigTest {
     void testPublicEndpointsAreAccessible() throws Exception {
         mockMvc.perform(get("/css/main.css"))
                 .andExpect(status().isOk());
+
+        mockMvc.perform(get("/rello.png"))
+                .andExpect(status().isOk());
     }
 
     @Test
